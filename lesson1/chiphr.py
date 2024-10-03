@@ -1,49 +1,17 @@
-def DDT_table(arr_in):                                      # DDT
-    print(f"Уравнения:")
-    arr_out = [[0] * len(arr_in) for _ in range(len(arr_in))]
-    print(f"a \ x | ", end="")
-    for i in range(len(arr_in)):
-        print(f"{i} ", end="")
-    print("\n"+len("a \ b | ")*"-"+"-"*(len(arr_in))*2)
-    for a in range(1, len(arr_in)):
-        print(f"a = {a} | ", end="")
-        for x in range(0, len(arr_in)):
-            b = (arr_in[x] ^ arr_in[x ^ a])                 # свою функцию пиши тут
-            print(f"{b} ", end="")
-            arr_out[a][b] += 1
-        print()
-    print()
+from mskzi.lesson1.DDT import DDT
 
-    print(f"DDT:")
-    print(f"a \ b | ", end="")
-    for i in range(1, len(arr_in)):
-        print(f"{i} ", end="")
-    print("\n"+len("a \ b | ")*"-"+"-"*(len(arr_in)-1)*2)
-    for a in range(1, len(arr_in)):
-        print(f"a = {a} | ", end="")
-        for b in range(1, len(arr_in)):
-            print(f"{arr_out[a][b]} ", end="")
-        print()
-    return arr_out
 
-def shifting(bitlist):                                      # перевод списка битов в список десятичных чисел
-     out = 0
-     for bit in bitlist:
-         out = (out << 1) | bit
-     return out
+def shifting(bitlist):
+    return sum(bit << i for i, bit in enumerate(reversed(bitlist)))
 
-def shifting_data(arr):                                     # применение функции выше для списка списков
-    out = []
-    for elem in arr:
-        elem = shifting(elem)
-        out.append(elem)
-    return out
 
-def xor_arrs(arr1, arr2):                                   # ксор списков
-    res = [[0] * len(arr1) for _ in range(len(arr1))]
-    for i in range(len(arr1)):
-        res[i] = arr1[i] ^ arr2[i]
-    return res
+def shifting_data(arr):
+    return [shifting(elem) for elem in arr]
+
+
+def xor_arrs(arr1, arr2):
+    return [a ^ b for a, b in zip(arr1, arr2)]
+
 
 def rounds(data, keys, s, num_rounds, a_start, DDT_table):  # функция раундов
     diff_table = [[0]]
@@ -92,7 +60,7 @@ if __name__ == '__main__':
     a = [2, 0, 0]                                           # выбранная разница для анализа работы шифратора
     num_rounds = 3                                          # число раундов шифрования
 
-    DDT_example = DDT_table(s)
+    DDT_example = DDT(s)
     print()
 
     data = databin_to_datadec(data, keys)
