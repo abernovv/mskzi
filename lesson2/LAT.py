@@ -11,7 +11,7 @@ def dec_to_bitarr(dec_num, size):
     return [int(x) for x in '{:0{size}b}'.format(dec_num, size=size)]
 
 
-def LAT(s):
+def LAT_consol(s):
     temp = len(s)
     size = int(math.log2(temp))
     res = [[0] * len(s) for _ in range(len(s))]
@@ -39,4 +39,4 @@ def LAT(s):
 
 if __name__ == '__main__':
     s = [3, 0, 7, 6, 1, 4, 2, 5]
-    LAT(s)
+    LAT_consol(s)
