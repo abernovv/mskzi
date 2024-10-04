@@ -1,5 +1,5 @@
 from mskzi.lesson1.DDT import DDT_consol,DDT_latex
-from mskzi.lesson2.LAT import LAT_consol
+from mskzi.lesson2.LAT import LAT_consol,LAT_latex
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
             DDT_latex(s)
         elif a == 2:
             s = [3, 0, 7, 6, 1, 4, 2, 5]
-            LAT_consol(s)
+            LAT_latex(s)
 
 
 if __name__ == '__main__':

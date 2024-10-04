@@ -10,8 +10,7 @@ def dot(v1, v2):
 def dec_to_bitarr(dec_num, size):
     return [int(x) for x in '{:0{size}b}'.format(dec_num, size=size)]
 
-
-def LAT_consol(s):
+def LAT(s):
     temp = len(s)
     size = int(math.log2(temp))
     res = [[0] * len(s) for _ in range(len(s))]
@@ -30,13 +29,26 @@ def LAT_consol(s):
 
             res[a][b] = abs((2 * count / pow(2, size)) - 1)
             # print(f"a={a}, b={b}, count={count}, m={len(s)}, res={res[a][b]}")
+    return res
 
+def LAT_consol(s):
+    res = LAT(s)
     print("LAT table")
     print("α \\ β")
     for elem in res:
         print(elem)
 
+def LAT_latex(s):
+    res = LAT(s)
+    print("\\begin{table}[h]\n\\centering\n\\begin{tabular}{c|" + "c" * len(s) + "}")
+    print(f"α / β &", "&".join(map(str, range(len(s)))), end="\\\\\\hline\n")
+    for a in range( len(s)):
+        print(f" {a} & ", end="")
+        print("&".join(str(res[a][b]) for b in range( len(s))), end="\\\\\n")
+    print("\\end{tabular}\n\\caption{LAT таблица}\n\\label{tab:LAT таблица}\n\\end{table}\n")
+
+
 
 if __name__ == '__main__':
     s = [3, 0, 7, 6, 1, 4, 2, 5]
-    LAT_consol(s)
+    LAT_latex(s)
